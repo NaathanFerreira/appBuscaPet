@@ -1,0 +1,25 @@
+import 'package:buscapet/screens/list_animals_scren.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+
+class AnimalsTile extends StatelessWidget {
+
+  final DocumentSnapshot snapshot;
+  AnimalsTile(this.snapshot);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: CircleAvatar(
+        radius: 25.0,
+        backgroundColor: Colors.transparent,
+        backgroundImage: NetworkImage(snapshot.data["icon"]),
+      ),
+      title: Text(snapshot.data["title"]),
+      trailing: Icon(Icons.keyboard_arrow_right),
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ListAnimalsScreen(snapshot)));
+      },
+    );
+  }
+}
